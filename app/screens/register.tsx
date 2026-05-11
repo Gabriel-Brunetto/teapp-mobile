@@ -11,6 +11,10 @@ export default function RegisterScreen() {
   const [confirmPassword, setConfirmPassword] = useState("")
 
   async function handleRegister() {
+    if(password !== confirmPassword){
+      console.log("Senhas precisam ser identicas")
+      return
+    }
     try {
       console.log('Enviando:', { name, email, password, confirmPassword })
       const response = await api.post('/users', { name, email, password, confirmPassword })
