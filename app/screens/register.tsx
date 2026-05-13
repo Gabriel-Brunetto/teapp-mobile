@@ -14,7 +14,7 @@ export default function RegisterScreen() {
   const router = useRouter();
 
   async function handleRegister() {
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
       console.log("Senhas precisam ser identicas")
       return
     }
@@ -24,9 +24,9 @@ export default function RegisterScreen() {
       console.log(response.data)
       setUser(prev => [...prev, response.data])
       setName(''),
-      setEmail(''),
-      setPassword(''),
-      setConfirmPassword('')
+        setEmail(''),
+        setPassword(''),
+        setConfirmPassword('')
       router.replace('/screens/login')
     }
     catch (err: any) {
@@ -48,46 +48,48 @@ export default function RegisterScreen() {
           source={require('../../assets/images/logo.png')}
         />
       </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Name"
-          style={styles.input}
-          placeholderTextColor='#000'
-          onChangeText={setName}
-          value={name}
-        />
-        <TextInput
-          placeholder="Email"
-          style={styles.input}
-          placeholderTextColor='#000'
-          onChangeText={setEmail}
-          value={email}
-        />
-        <TextInput
-          placeholder="Password"
-          style={styles.input}
-          placeholderTextColor='#000'
-          onChangeText={setPassword}
-          value={password}
-        />
-        <TextInput
-          placeholder="Confirm Your Password"
-          style={styles.input}
-          placeholderTextColor='#000'
-          onChangeText={setConfirmPassword}
-          value={confirmPassword}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleRegister}>
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.buttonLogin]}>
-          <Text style={[styles.buttonText, { color: '#000' }]}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.replace('/screens/login')} style={styles.hasLogin }>
-          <Text style={[styles.buttonText, { color: '#000' }]}>Ja Possui Conta?</Text>
-        </TouchableOpacity>
+      <View style={styles.colorBack}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Name"
+            style={styles.input}
+            placeholderTextColor='#000'
+            onChangeText={setName}
+            value={name}
+          />
+          <TextInput
+            placeholder="Email"
+            style={styles.input}
+            placeholderTextColor='#000'
+            onChangeText={setEmail}
+            value={email}
+          />
+          <TextInput
+            placeholder="Password"
+            style={styles.input}
+            placeholderTextColor='#000'
+            onChangeText={setPassword}
+            value={password}
+          />
+          <TextInput
+            placeholder="Confirm Your Password"
+            style={styles.input}
+            placeholderTextColor='#000'
+            onChangeText={setConfirmPassword}
+            value={confirmPassword}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
+            <Text style={styles.buttonText}>Register</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.buttonLogin]}>
+            <Text style={[styles.buttonText, { color: '#000' }]}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.replace('/screens/login')} style={styles.hasLogin}>
+            <Text style={[styles.buttonText, { color: '#000' }]}>Ja Possui Conta?</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -98,6 +100,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  colorBack: {
+    height: 500,
+    width: '100%',
+    borderTopLeftRadius: 250,
+    alignItems: 'center',
+    backgroundColor: '#CAF0EA'
+  },
   title: {
     marginTop: 100,
     fontSize: 64,
@@ -107,7 +116,7 @@ const styles = StyleSheet.create({
   logo: {
     marginTop: -70,
     width: 350,
-    height: 350,
+    height: 350 
   },
   inputContainer: {
     marginTop: -70,
@@ -121,7 +130,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#000"
+    borderColor: "#000",
+    backgroundColor: '#fff'
   },
   buttonContainer: {
     marginTop: 20
@@ -142,7 +152,7 @@ const styles = StyleSheet.create({
   buttonLogin: {
     backgroundColor: 'white',
   },
-  hasLogin:{
+  hasLogin: {
     marginTop: 15,
     alignItems: 'center',
     fontSize: 15,
