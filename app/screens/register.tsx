@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import api from "../services/api";
 import userHooks from "../hooks/useUsers";
+import { useRouter } from "expo-router";
 
 export default function RegisterScreen() {
   const { setUser } = userHooks()
@@ -9,6 +10,8 @@ export default function RegisterScreen() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+
+  const router = useRouter();
 
   async function handleRegister() {
     if(password !== confirmPassword){
@@ -24,6 +27,7 @@ export default function RegisterScreen() {
       setEmail(''),
       setPassword(''),
       setConfirmPassword('')
+      router.replace('/screens/login')
     }
     catch (err: any) {
       console.error('Status:', err.response?.status)
@@ -81,6 +85,9 @@ export default function RegisterScreen() {
         <TouchableOpacity style={[styles.button, styles.buttonLogin]}>
           <Text style={[styles.buttonText, { color: '#000' }]}>Login</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => router.replace('/screens/login')} style={styles.hasLogin }>
+          <Text style={[styles.buttonText, { color: '#000' }]}>Ja Possui Conta?</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -92,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    marginTop: 120,
+    marginTop: 100,
     fontSize: 64,
     fontWeight: 'bold',
     color: '#1E4D6B'
@@ -134,5 +141,10 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     backgroundColor: 'white',
+  },
+  hasLogin:{
+    marginTop: 15,
+    alignItems: 'center',
+    fontSize: 15,
   }
 })
