@@ -18,6 +18,7 @@ export default function RegisterScreen() {
       console.log("Senhas precisam ser identicas")
       return
     }
+    
     try {
       console.log('Enviando:', { name, email, password, confirmPassword })
       const response = await api.post('/users', { name, email, password, confirmPassword })
@@ -83,12 +84,12 @@ export default function RegisterScreen() {
           <TouchableOpacity style={styles.button} onPress={handleRegister}>
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonLogin]}>
-            <Text style={[styles.buttonText, { color: '#000' }]}>Login</Text>
+          <TouchableOpacity style={[styles.button, styles.buttonLogin]} onPress={() => router.replace('/screens/login')}>
+            <Text style={[styles.buttonText, { color: '#000' }]}>Have Alredy Account</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.replace('/screens/login')} style={styles.hasLogin}>
-            <Text style={[styles.buttonText, { color: '#000' }]}>Ja Possui Conta?</Text>
-          </TouchableOpacity>
+        </View>
+        <View style={{alignItems: 'center', marginTop: 30}}>
+          <Text>Developed By Gabriel Brunetto</Text>
         </View>
       </View>
     </View>
