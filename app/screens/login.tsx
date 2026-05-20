@@ -23,14 +23,14 @@ export default function LoginScreen() {
             <View style={styles.colorBack}>
                 <View style={styles.inputContainer}></View>
                 <TextInput
-                    placeholder="Name"
+                    placeholder="Email"
                     style={styles.input}
                     placeholderTextColor='#000'
                     onChangeText={setEmail}
                     value={email}
                 />
                 <TextInput
-                    placeholder="Email"
+                    placeholder="Password"
                     style={styles.input}
                     placeholderTextColor='#000'
                     onChangeText={setPassword}
