@@ -1,7 +1,8 @@
 import RegisterScreen from "./screens/register"
+import LoginScreen from "./screens/login"
 
 export default function Index(){
   return(
-    <RegisterScreen/>
+    <LoginScreen/>
   )
 }
