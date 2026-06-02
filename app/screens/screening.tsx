@@ -1,6 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { useRouter } from "expo-router";
 
 export default function Screening() {
+
+    const router = useRouter();
+    
     return (
         <View style={styles.container}>
             <Image
@@ -16,7 +20,7 @@ export default function Screening() {
                     Leva cerca de 5-10 minutos para ser concluído
                 </Text>
             </View>
-            <TouchableOpacity style={[styles.button]}>
+            <TouchableOpacity style={[styles.button]} onPress={() => router.push('/screens/dsm')}>
                 <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.skipButton]}>
