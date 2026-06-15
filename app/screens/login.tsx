@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import userHooks from '../hooks/useUsers'
+import ForgotPassword from './forgotPassword'
 
 
 export default function LoginScreen() {
@@ -43,11 +44,14 @@ export default function LoginScreen() {
                     <TouchableOpacity style={[styles.button, styles.buttonLogin]} onPress={() => router.replace('/screens/register')}>
                         <Text>Register</Text>
                     </TouchableOpacity>
-                    <View style={{ alignItems: 'center', marginTop: 150 }}>
-                        <Text>Developed By Gabriel Brunetto</Text>
-                    </View>
                 </View>
-                <View />    
+                <TouchableOpacity style={styles.forgotPassword} onPress={() => router.push('/screens/forgotPassword')}>
+                    <Text>Esqueci minha senha</Text>
+                </TouchableOpacity>
+                <View style={{ alignItems: 'center', marginTop: 150 }}>
+                    <Text>Developed By Gabriel Brunetto</Text>
+                </View>
+                <View />
             </View>
         </View>
     )
@@ -110,4 +114,8 @@ const styles = StyleSheet.create({
     buttonLogin: {
         backgroundColor: 'white',
     },
+    forgotPassword: {
+        justifyContent: "center",
+        marginTop: 20,
+    }
 })
