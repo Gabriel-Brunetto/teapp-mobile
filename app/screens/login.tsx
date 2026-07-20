@@ -3,13 +3,48 @@ import { useState } from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import userHooks from '../hooks/useUsers'
 import ForgotPassword from './forgotPassword'
+import api from '../services/api'
+import { Alert } from 'react-native';
 
 
 export default function LoginScreen() {
+    const { setUser } = userHooks()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     const router = useRouter();
+
+
+    async function handleLogin() {
+        try {
+            const response = await api.post('/auth/login', { email, pass: password})
+            console.log(response.data)
+            router.replace('/screens/screening')
+        } catch (error: any) {
+            if (error.response) {
+                const status = error.response.status;
+
+                if (status === 401) {
+                    Alert.alert('Erro', 'Credenciais inválidas. Verifique seu usuário e senha.');
+                } else if (status === 400) {
+                    Alert.alert('Erro', 'Dados inválidos. Verifique as informações enviadas.');
+                } else if (status === 403) {
+                    Alert.alert('Erro', 'Você não tem permissão para essa ação.');
+                } else if (status === 404) {
+                    Alert.alert('Erro', 'Recurso não encontrado.');
+                } else if (status >= 500) {
+                    Alert.alert('Erro', 'Erro no servidor. Tente novamente mais tarde.');
+                } else {
+                    Alert.alert('Erro', error.response.data?.message || 'Algo deu errado.');
+                }
+            } else if (error.request) {
+                Alert.alert('Erro', 'Sem conexão com o servidor.');
+            } else {
+                Alert.alert('Erro', error.message);
+            }
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View>
@@ -38,7 +73,7 @@ export default function LoginScreen() {
                     value={password}
                 />
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={[styles.button]} onPress={() => router.replace('/screens/screening')}>
+                    <TouchableOpacity style={[styles.button]} onPress={handleLogin}>
                         <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.button, styles.buttonLogin]} onPress={() => router.replace('/screens/register')}>
